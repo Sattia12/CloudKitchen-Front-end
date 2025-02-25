@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="/js/orderPage.js" defer></script>
     <title>Order Management</title>
 </head>
 
@@ -38,39 +39,42 @@
 
     <div class="container mt-5">
         <h2>Orders</h2>
-        <form>
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="foodItem" class="form-label">Food Item</label>
-                    <select class="form-select" id="foodItem">
-                        <option selected>Select a food item</option>
-                        <option value="1">Pizza</option>
-                        <option value="2">Pasta</option>
-                        <option value="3">Burger</option>
-                    </select>
-                </div>
-    
-                <div class="col-md-4">
-                    <label for="quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
-                </div>
-    
-                <div class="col-md-4 d-flex">
-                    <div class="flex-grow-1 me-2">
-                        <label for="tableNumber" class="form-label">Table Number</label>
-                        <input type="number" class="form-control" id="tableNumber" placeholder="Enter table number">
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="tableNumber" class="form-label">Table Number</label>
+                <input type="number" class="form-control" id="tableNumber" placeholder="Enter table number">
+            </div>
+        </div>
+
+        <form id="orderForm">
+            <div id="orderItems">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="foodItem" class="form-label">Food Item</label>
+                        <select class="form-select" id="foodItem">
+                            <option selected>Select a food item</option>
+                            <option value="1">Pizza</option>
+                            <option value="2">Pasta</option>
+                            <option value="3">Burger</option>
+                        </select>
                     </div>
-                    <div class="d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <div class="col-md-4">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
+                    </div>
+
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-danger" onclick="removeItem(this)">Remove</button>
                     </div>
                 </div>
             </div>
+
+            <button type="button" class="btn btn-secondary" onclick="addItem()">Add Item</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    
-    
-    
 
-    
 </body>
 </html>

@@ -1,11 +1,68 @@
 .navbar {
-    background-color: #6a0dad;  
+    background: linear-gradient(135deg, #6a0dad, #8b5cf6);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .nav-link {
-    color: #f5e1f1;  
+    color: #f5e1f1;
 }
 
-.navbar .nav-link:hover {
-    color: #ffffff; 
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 800px;
+    background: #faf5ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #6a0dad;
+    text-align: center;
+}
+
+.form-control, .form-select {
+    border: 2px solid #6a0dad;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 5px rgba(107, 33, 168, 0.5);
+}
+
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #6a0dad;
+}
+
+.btn-primary {
+    background-color: #6a0dad;
+    border-color: #6a0dad;
+}
+
+.btn-primary:hover {
+    background-color: #8b5cf6;
+    border-color: #8b5cf6;
+}
+
+.btn-danger:hover {
+    background-color: #b02a37;
+}
+
+#orderForm {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

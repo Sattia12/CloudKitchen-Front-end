@@ -4,8 +4,8 @@ function addItem() {
     row.classList.add("row", "mb-3");
     row.innerHTML = `
         <div class="col-md-4">
-            <label for="foodItem" class="form-label">Food Item</label>
-            <select class="form-select" id="foodItem">
+            <label class="form-label">Food Item</label>
+            <select class="form-select" name="foodItem">
                 <option selected>Select a food item</option>
                 <option value="1">Pizza</option>
                 <option value="2">Pasta</option>
@@ -14,11 +14,11 @@ function addItem() {
         </div>
 
         <div class="col-md-4">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" name="quantity" placeholder="Enter quantity">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 d-flex align-items-end">
             <button type="button" class="btn btn-danger" onclick="removeItem(this)">Remove</button>
         </div>
     `;

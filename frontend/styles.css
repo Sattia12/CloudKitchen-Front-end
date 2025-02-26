@@ -51,6 +51,16 @@ h2 {
     border-color: #6a0dad;
 }
 
+.btn-secondary {
+    background-color: #9a24eead;
+    border-color: #6a0dad;
+}
+
+.btn-secondary:hover {
+    background-color: #8b5cf6;
+    border-color: #8b5cf6;
+}
+
 .btn-primary:hover {
     background-color: #8b5cf6;
     border-color: #8b5cf6;

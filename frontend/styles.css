@@ -1,3 +1,7 @@
+body {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 .navbar {
     background: linear-gradient(135deg, #6a0dad, #8b5cf6);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -34,45 +38,21 @@ h2 {
     border: 2px solid #6a0dad;
     border-radius: 5px;
     padding: 10px;
+    font-size: 1rem;
 }
 
-.form-control:focus, .form-select:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 5px rgba(107, 33, 168, 0.5);
+.select2-selection__arrow {
+    display: none;
 }
 
-.btn-outline-light:hover {
-    background-color: #ffffff;
+.select2-selection--single::after {
+    content: '▼'; 
+    font-size: 14px;
     color: #6a0dad;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.btn-primary {
-    background-color: #6a0dad;
-    border-color: #6a0dad;
-}
 
-.btn-secondary {
-    background-color: #9a24eead;
-    border-color: #6a0dad;
-}
-
-.btn-secondary:hover {
-    background-color: #8b5cf6;
-    border-color: #8b5cf6;
-}
-
-.btn-primary:hover {
-    background-color: #8b5cf6;
-    border-color: #8b5cf6;
-}
-
-.btn-danger:hover {
-    background-color: #b02a37;
-}
-
-#orderForm {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}

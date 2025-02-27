@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", serif;
+  color: #333;
+  background-color: rgb(255, 230, 230);
+  background-image: url("inventory.jpeg");
+  background-blend-mode: lighten;
+}
+
+/* Header / Navbar */
+header {
+  background-color: #a185d6; /* light purple */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #401574;
+}
+
+nav a {
+  margin: 0 0.5rem;
+  color: #471089;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: large;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.login-btn {
+  background-color: #6a1b9a;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-btn:hover {
+  background-color: #471089;
+  color: #fff;
+}
+
+/* Main container */
+main {
+  max-width: 1200px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  color: #4a148c;
+}
+
+/* Low stock banner */
+/* .low-stock-banner {
+  background-color: #f44336;
+  color: #fff;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+} */
+
+/* Inventory table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #e1bee7; /* light purple background */
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #ccc;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.action-btn {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.action-btn:hover {
+  background-color: #d32f2f;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  margin-right: 0.5rem;
+}
+
+.edit-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Status badge */
+.status {
+  font-weight: bold;
+  color: #f44336;
+}
+
+/* Expiry status */
+.expiry-status {
+  font-weight: bold;
+  color: #f44336;
+}
+
+
+/* Add stock form */
+.form-section {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.form-section h2 {
+  margin-bottom: 1rem;
+  color: #4a148c;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.save-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.save-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Existing .form-section styles can remain, but we add new styles for .horizontal-form */
+.horizontal-form .form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Space out each label and input pair */
+.horizontal-form .form-row label {
+  margin-right: 0.5rem;
+  min-width: 100px; /* Ensures labels have consistent width */
+  font-weight: bold;
+}
+
+/* Inputs can grow to fill space or you can fix widths */
+.horizontal-form .form-row input {
+  margin-right: 2rem; /* Spacing between this input and the next label */
+  flex: 1;
+  max-width: 200px; /* Adjust as needed */
+  min-height: 24px;
+}
+
+/* Adjust the button so it’s on its own line or inline, whichever you prefer */
+.horizontal-form button.save-btn {
+  margin-top: 1rem;
+  /* If you want the button on a new line: */
+  display: block;
+  /* If you want it inline with the second row: remove display:block */
+}
+
+#expiryDate {
+  color: grey;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav a {
+    margin: 0 0.25rem;
+  }
+
+  .form-group {
+    flex-direction: column;
+  }
+
+  th,
+  td {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .horizontal-form .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .horizontal-form .form-row input {
+    margin-right: 0;
+    max-width: 100%;
+  }
+  
+  .horizontal-form .form-row label {
+    margin-bottom: 0.25rem;
+    min-width: auto;
+  }
+}
+

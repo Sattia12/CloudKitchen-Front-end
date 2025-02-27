@@ -10,13 +10,13 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: form.get("username"),
+            username: form.get("email"),
             password: form.get("password")
         })
     };
 
     try {
-        const response = await fetch("deploymenthere", options);
+        const response = await fetch("deployment", options);
         const data = await response.json();
 
         if (response.ok) {

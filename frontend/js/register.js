@@ -11,7 +11,6 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
         },
         body: JSON.stringify({
             name: form.get("name"),
-            username: form.get("username"),
             email: form.get("email"),
             password: form.get("password"),
             role: form.get("role"),

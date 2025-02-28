@@ -48,9 +48,9 @@ function addItem() {
     row.classList.add("row", "mb-3");
     row.innerHTML = `
         <div class="col-md-4">
-            <label class="form-label">Food Item</label>
+            <label class="form-label">Menu Item</label>
             <select class="form-select" name="foodItem">
-                <option selected>Select a food item</option>
+                <option selected>Select a menu item</option>
                 <option value="1">Pizza</option>
                 <option value="2">Pasta</option>
                 <option value="3">Burger</option>

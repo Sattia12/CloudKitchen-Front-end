@@ -9,7 +9,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/inventory.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <link
@@ -17,11 +17,10 @@
       href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"
     />
     <script src="js/orderPage.js" defer></script>
-    <title>Order Management</title>
+    <title>Live Orders</title>
   </head>
-
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+<body>
+        <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="homepage.html">Cloud Kitchen</a>
         <button
@@ -45,12 +44,12 @@
                 <a class="nav-link" href="dashboard.html">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="orderpage.html"
+                <a class="nav-link" href="orderpage.html"
                   >Make an Order</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Live Orders</a>
+                <a class="nav-link active" href="liveOrders.html">Live Orders</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="inventory.html">Inventory</a>
@@ -65,41 +64,23 @@
         </div>
       </div>
     </nav>
-
-    <div class="container mt-5">
-      <h2>Orders</h2>
-
-      <div class="row mb-3">
-        <div class="col-md-4">
-          <label for="tableNumber" class="form-label">Table Number</label>
-          <input
-            type="number"
-            class="form-control"
-            id="tableNumber"
-            placeholder="Enter table number"
-          />
-        </div>
-      </div>
-
-      <form id="orderForm">
-        <div id="orderItems"></div>
-        <!-- empty at start -->
-
-        <button type="button" class="btn btn-secondary" onclick="addItem()">
-          Add Item
-        </button>
-
-        <div class="mt-4">
-          <h3>Notes</h3>
-          <textarea
-            class="form-control"
-            id="orderNotes"
-            rows="3"
-            placeholder="Enter any notes here..."
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    <div class="container">
+        <h1>Live Orders</h1>
+         <!-- Inventory Table -->
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Order Time</th>
+              <th>Quantity</th>
+              <th>Menu Items</th>
+              <th>Notes</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
     </div>
-  </body>
+</body>
 </html>

@@ -4,6 +4,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+    --primary-color: #6a0dad;
+    --secondary-color: #8b5cf6;
+    --tertiary-color: white;
+}
 
 /* Make sure the page fills the browser window */
 html,
@@ -21,8 +26,8 @@ body {
 
 /* Left side styling */
 .left-side {
-  width: 50%;
-  background: linear-gradient(135deg, #6a0dad, #8b5cf6); /* Light purple background */
+  width: 60%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Light purple background */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,7 +79,7 @@ body {
 .right-side {
   width: 50%;
   background-color: #fff;
-  background-image: url("food.png"); /* Replace with your actual pattern */
+  background-image: url('../assets/background.png'); /* Replace with your actual pattern */
   background-repeat: repeat;
   background-size: cover;
 }

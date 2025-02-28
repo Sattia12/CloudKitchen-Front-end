@@ -1,3 +1,9 @@
+:root {
+    --primary-color: #6a0dad;
+    --secondary-color: #8b5cf6;
+    --tertiary-color: white;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -9,7 +15,9 @@ body {
     position: relative;
     overflow: hidden;
 }
-
+.no-auth::before {
+    filter: blur(6px);
+}
 body::before {
     content: "";
     position: absolute;
@@ -17,14 +25,14 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('background.png') no-repeat center center;
+    background: url(/frontend/assets/background.png) no-repeat center center;
     background-size: cover;
     opacity: 0.4;
     z-index: -1;
 }
 
 .navbar {
-    background: linear-gradient(135deg, #6a0dad, #8b5cf6);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -51,32 +59,33 @@ body::before {
 }
 
 h2 {
-    color: #6a0dad;
+    color: var(--primary-color);
     text-align: center;
 }
 
 .btn-primary {
     background-color: #7c0fc9ce;
-    border-color: #6a0dad;
+    border-color: var(--primary-color);
+    margin-top: 15px;
 }
 
 .btn-primary:hover {
     background-color: #9a24eead;
-    border-color: #8b5cf6;
+    border-color: var(--secondary-color);
 }
 
 .btn-secondary {
     background-color: #9a24eead;
-    border-color: #6a0dad;
+    border-color: var(--primary-color);
 }
 
 .btn-secondary:hover {
-    background-color: #8b5cf6;
-    border-color: #8b5cf6;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
 .form-control, .form-select {
-    border: 2px solid #6a0dad;
+    border: 2px solid var(--primary-color);
     border-radius: 5px;
     padding: 10px;
     font-size: 1rem;
@@ -96,7 +105,7 @@ h2 {
 .select2-selection--single::after {
     content: '▼'; 
     font-size: 14px;
-    color: #6a0dad;
+    color: var(--primary-color);
     position: absolute;
     right: 10px;
     top: 50%;

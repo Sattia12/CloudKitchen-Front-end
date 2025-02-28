@@ -21,7 +21,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (response.ok) {
       localStorage.setItem("token", data.token);
-      window.location.assign("dashboard.html");
+      window.location.assign("/dashboard.html");
     } else {
       alert(data.error || "Login failed.");
     }

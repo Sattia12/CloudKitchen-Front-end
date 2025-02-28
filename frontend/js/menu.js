@@ -30,3 +30,4 @@ $('#menuForm').on('submit', function(e) {
         alert(`Menu Item: ${menuItem}\nCategory: ${category}\nIngredients:\n${ingredients.join('\n')}`);
     }
 });
+

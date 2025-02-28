@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"/>
-    <script src="/js/orderPage.js" defer></script>
+    <script src="/js/menu.js" defer></script>
     <title>Order Management</title>
 </head>
 
@@ -46,27 +46,15 @@
     </nav>
 
     <div class="container mt-5">
-        <h2>Orders</h2>
+        <h2>Order Management</h2>
+        <div id="orderList" class="mt-3">
+            <!-- orders -->
 
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <label for="tableNumber" class="form-label">Table Number</label>
-                <input type="number" class="form-control" id="tableNumber" placeholder="Enter table number">
-            </div>
-        </div>
 
-        <form id="orderForm">
-            <div id="orderItems"></div> <!-- empty at start -->
-
-            <button type="button" class="btn btn-secondary" onclick="addItem()">Add Item</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-        <div class="mt-4">
-            <h3>Notes</h3>
-            <textarea class="form-control" id="orderNotes" rows="4" placeholder="Enter any notes here..."></textarea>
         </div>
     </div>
-</body>
+    
+    
 
+</body>
 </html>

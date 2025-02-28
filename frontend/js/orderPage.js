@@ -75,3 +75,4 @@ function addItem() {
 function removeItem(button) {
     button.closest('.row').remove();
 }
+ 

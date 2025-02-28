@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"/>
-    <script src="/js/orderPage.js" defer></script>
+    <script src="/js/menu.js" defer></script>
     <title>Order Management</title>
 </head>
 
@@ -41,29 +41,38 @@
             </div>
         </div>
     </nav>
-
+    
     <div class="container mt-5">
-        <h2>Orders</h2>
-
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <label for="tableNumber" class="form-label">Table Number</label>
-                <input type="number" class="form-control" id="tableNumber" placeholder="Enter table number">
+        <h2>Add Menu Item</h2>
+        <form id="menuForm">
+            <div class="mb-3">
+                <label for="menuItem" class="form-label">Menu Item Name</label>
+                <input type="text" class="form-control" id="menuItem" placeholder="Enter menu item name" required>
             </div>
-        </div>
-
-        <form id="orderForm">
-            <div id="orderItems"></div> <!-- empty at start -->
-
-            <button type="button" class="btn btn-secondary" onclick="addItem()">Add Item</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="starter">Starter</option>
+                    <option value="main">Main</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+            </div>
+            <div class="mb-3" id="ingredientsContainer">
+                <label class="form-label">Ingredients</label>
+                <div class="input-group mb-2 ingredient-group">
+                    <input type="text" class="form-control ingredient" placeholder="Ingredient" required>
+                    <input type="number" class="form-control quantity" placeholder="Quantity" required>
+                    <input type="text" class="form-control unit" placeholder="Unit" required>
+                    <button type="button" class="btn btn-danger remove-ingredient">Remove</button>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-secondary" id="addIngredient">Add Ingredient</button>
+                <button type="submit" class="btn btn-primary">Add Item</button>
+            </div>
         </form>
-
-        <div class="mt-4">
-            <h3>Notes</h3>
-            <textarea class="form-control" id="orderNotes" rows="4" placeholder="Enter any notes here..."></textarea>
-        </div>
     </div>
-</body>
 
+</body>
 </html>

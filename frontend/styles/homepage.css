@@ -4,6 +4,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+    --primary-color: #6a0dad;
+    --secondary-color: #8b5cf6;
+    --tertiary-color: white;
+}
 
 /* Make sure the page fills the browser window */
 html,
@@ -21,8 +26,8 @@ body {
 
 /* Left side styling */
 .left-side {
-  width: 50%;
-  background-color: #eae0f8; /* Light purple background */
+  width: 60%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Light purple background */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,20 +37,21 @@ body {
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 1rem;
-  color: #555;
+  color: #ffffff;
 }
 .left-side .description {
   margin-bottom: 1.5rem;
-  color: #666;
+  color: #aeaeae;
+  font-size: xx-large;
 }
 .left-side h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 0.5rem;
-  color: #6e25b0;
+  color: white; /* Dark greenish color */
 }
 .left-side .subtitle {
   margin-bottom: 2rem;
-  color: #333;
+  color: #aeaeae;
 }
 
 /* Button styling */
@@ -73,7 +79,7 @@ body {
 .right-side {
   width: 50%;
   background-color: #fff;
-  background-image: url("food.png"); /* Replace with your actual pattern */
+  background-image: url('../assets/background.png'); /* Replace with your actual pattern */
   background-repeat: repeat;
   background-size: cover;
 }

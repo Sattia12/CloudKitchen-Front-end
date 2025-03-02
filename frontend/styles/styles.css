@@ -1,0 +1,114 @@
+:root {
+    --primary-color: #6a0dad;
+    --secondary-color: #8b5cf6;
+    --tertiary-color: white;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+}
+.no-auth::before {
+    filter: blur(6px);
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/frontend/assets/background.png) no-repeat center center;
+    background-size: cover;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-link {
+    color: #f5e1f1;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 800px;
+    background: #faf5ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #7c0fc9ce;
+    border-color: var(--primary-color);
+    margin-top: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #9a24eead;
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary {
+    background-color: #9a24eead;
+    border-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+
+
+.select2-selection__arrow {
+    display: none;
+}
+
+.col-md-4.d-flex.align-items-end {
+    display: flex;
+    align-items: center; 
+}
+
+.select2-selection--single::after {
+    content: '▼'; 
+    font-size: 14px;
+    color: var(--primary-color);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+

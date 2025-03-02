@@ -157,11 +157,13 @@ document
 
     const token = localStorage.getItem("token");
     const tableNumber = document.getElementById("tableNumber");
+    const orderNotes = document.getElementById("orderNotes").value;
 
     let orderData = {
       table_number: tableNumber.value,
       user_id: 123,
       items: orderItems,
+      order_notes: orderNotes,
     };
 
     try {

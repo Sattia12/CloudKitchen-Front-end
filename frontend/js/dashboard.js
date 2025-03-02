@@ -191,4 +191,7 @@ fetch("http://localhost:3000/analytics/dish-category-distribution")
                 labels: categories, values: counts, type: "pie"
             }], { title: "Ingredient Category Distribution" });
         });
+
+
+        
 });

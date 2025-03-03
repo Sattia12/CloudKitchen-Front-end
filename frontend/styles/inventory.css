@@ -310,4 +310,22 @@ td:last-child {
   }
 }
 
+.change-status-btn {
+  background-color: #7c0fc9ce;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
 
+.change-status-btn:hover {
+  background-color: #9a24eead;
+}
+
+.change-status-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

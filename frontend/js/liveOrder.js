@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const ordersTable = document.getElementById("orders-table-body");
 
+  const token = localStorage.getItem("token");
+  options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
   function fetchOrders() {
-    fetch("http://localhost:3000/orders")
+    fetch("http://localhost:3000/orders", options)
       .then((response) => response.json())
       .then((orders) => {
         ordersTable.innerHTML = "";

@@ -19,7 +19,6 @@ html, body {
 
 body {
     position: relative;
-    overflow: hidden;
 }
 .no-auth::before {
     filter: blur(6px);
@@ -113,11 +112,24 @@ td {
   border-bottom: 1px solid #ccc;
 }
 
+td input {
+  width: 90%; /* Adjust width to fit within table cell */
+  max-width: 120px; /* Prevent excessive width */
+  padding: 4px;
+  font-size: 14px;
+  text-align: center; /* Keep text centered */
+}
+
 tr:last-child td {
   border-bottom: none;
 }
+td:last-child {
+  white-space: nowrap; /* Prevent buttons from stacking */
+}
 
 .action-btn {
+  display: inline-block;
+  margin-right: 5px;
   background-color: #f44336;
   color: #fff;
   border: none;
@@ -140,16 +152,49 @@ tr:last-child td {
   background-color: #388e3c;
 }
 
+
+
 /* Status badge */
 .status {
   font-weight: bold;
   color: #f44336;
 }
 
+
+/* Low Stock - Red */
+.status.low-stock {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* In Stock - Green */
+.status.in-stock {
+  color: #28a745;
+  font-weight: bold;
+}
+
 /* Expiry status */
 .expiry-status {
   font-weight: bold;
   color: #f44336;
+}
+
+/* Expiry Safe (More than 7 days left) - Green */
+.expiry-status.expiry-safe {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Expiry Warning (7 days or less) - Orange */
+.expiry-status.expiry-warning {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+/* Expired (Already past expiry date) - Red */
+.expiry-status.expiry-danger {
+  color: #f44336;
+  font-weight: bold;
 }
 
 
@@ -264,4 +309,5 @@ tr:last-child td {
     min-width: auto;
   }
 }
+
 

@@ -1,116 +1,177 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".horizontal-form");
   const tbody = document.querySelector("table tbody");
+  const API_URL = "http://localhost:3000/inventory"; // Update if hosted elsewhere
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+  // Fetch and populate inventory table
+  async function fetchInventory() {
+      try {
+          const response = await fetch(API_URL);
+          const inventory = await response.json();
+          tbody.innerHTML = ""; // Clear table
 
-    // Get values from the form inputs
-    const itemName = document.getElementById("itemName").value.trim();
-    const category = document.getElementById("category").value.trim();
-    const price = document.getElementById("price").value.trim();
-    const quantity = document.getElementById("quantity").value.trim();
-    const unit = document.getElementById("unit").value.trim();
-    const expiryDateValue = document.getElementById("expiryDate").value;
+          inventory.forEach(addRowToTable);
+      } catch (error) {
+          console.error("Error fetching inventory:", error);
+      }
+  }
 
-    // Calculate expiry status based on expiryDateValue
-    let expiryDisplay = "";
-    if (expiryDateValue) {
-      const expiryDate = new Date(expiryDateValue);
-      const now = new Date();
-      const timeDiff = expiryDate - now;
-      const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-      expiryDisplay = daysRemaining >= 0 ? `Expires in ${daysRemaining} days` : "Expired";
-    } else {
-      expiryDisplay = "No expiry date";
+  // Format date to British format (DD/MM/YYYY)
+  function formatDateBritish(dateString) {
+      if (!dateString) return "N/A";
+      const date = new Date(dateString);
+      return isNaN(date.getTime()) ? dateString : date.toLocaleDateString("en-GB");
+  }
+
+  // Add row to inventory table
+  function addRowToTable(item) {
+    const tr = document.createElement("tr");
+
+    // Format expiry date in British format
+    const rawExpiry = item.expiry_date || "";
+    const formattedExpiryDate = rawExpiry ? formatDateBritish(rawExpiry) : "N/A";
+
+    // Calculate expiry status & color class
+    let expiryDisplay = "No expiry date";
+    let expiryClass = "expiry-safe"; // Default to green (safe)
+
+    if (rawExpiry) {
+        const expiryDate = new Date(rawExpiry);
+        const now = new Date();
+        const daysRemaining = Math.ceil((expiryDate - now) / (1000 * 60 * 60 * 24));
+
+        if (daysRemaining < 0) {
+            expiryDisplay = "Expired";
+            expiryClass = "expiry-danger"; // Red (expired)
+        } else if (daysRemaining <= 7) {
+            expiryDisplay = `Expires in ${daysRemaining} days`;
+            expiryClass = "expiry-warning"; // Red (near expiry)
+        } else {
+            expiryDisplay = `Expires in ${daysRemaining} days`;
+        }
     }
 
-    // Determine stock status
-    const numericQuantity = parseFloat(quantity);
-    const stockStatus = numericQuantity <= 5 ? "Low stock" : "In stock";
+    // Determine stock status & color
+    const stockStatus = item.quantity <= 5 ? "Low stock" : "In stock";
+    const stockClass = item.quantity <= 5 ? "low-stock" : "in-stock";
 
-    // Create a new table row with non-editable Expiry status, Stock status, and Action cells
-    const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${itemName}</td>
-      <td>${category}</td>
-      <td>${quantity}</td>
-      <td>${unit}</td>
-      <td>${price}</td>
-      <td>${expiryDateValue}</td>
-      <td><span class="expiry-status">${expiryDisplay}</span></td>
-      <td><span class="status">${stockStatus}</span></td>
-      <td>
-        <button class="action-btn edit-btn">Edit</button>
-        <button class="action-btn remove-btn">Remove</button>
-      </td>
+        <td>${item.name}</td>
+        <td>${item.category}</td>
+        <td>${item.quantity}</td>
+        <td>${item.unit}</td>
+        <td>${item.price_per_unit}</td>
+        <td data-expiry="${rawExpiry}">${formattedExpiryDate}</td>
+        <td><span class="expiry-status ${expiryClass}">${expiryDisplay}</span></td>
+        <td><span class="status ${stockClass}">${stockStatus}</span></td>
+        <td>
+            <button class="action-btn edit-btn">Edit</button>
+            <button class="action-btn remove-btn">Remove</button>
+        </td>
     `;
+
     tbody.appendChild(tr);
 
-    // Remove functionality
-    const removeBtn = tr.querySelector(".remove-btn");
-    removeBtn.addEventListener("click", () => {
-      tr.remove();
-    });
+    // Attach event listeners for edit and delete buttons
+    tr.querySelector(".remove-btn").addEventListener("click", () => deleteInventoryItem(item.ingredient_id, tr));
+    tr.querySelector(".edit-btn").addEventListener("click", () => editInventoryItem(item, tr));
+}
 
-    // Edit functionality: Toggle between "Edit" and "Save"
-    const editBtn = tr.querySelector(".edit-btn");
-    editBtn.addEventListener("click", () => {
-      // Editable cells: indexes 0 to 5 (Item Name, Category, Quantity, Unit, Price, Expiry Date)
-      const cells = tr.querySelectorAll("td");
-      if (editBtn.textContent === "Edit") {
-        for (let i = 0; i < 6; i++) {
-          const cellValue = cells[i].textContent;
-          // For the Expiry Date cell (index 5), use a date input; otherwise, use text input.
-          if (i === 5) {
-            cells[i].innerHTML = `<input type="date" value="${cellValue}" />`;
-          } else {
-            cells[i].innerHTML = `<input type="text" value="${cellValue}" />`;
-          }
-        }
-        editBtn.textContent = "Save";
-      } else {
-        // Save mode: Retrieve new values from inputs and update the row
-        const newItemName = cells[0].querySelector("input").value;
-        const newCategory = cells[1].querySelector("input").value;
-        const newQuantity = cells[2].querySelector("input").value;
-        const newUnit = cells[3].querySelector("input").value;
-        const newPrice = cells[4].querySelector("input").value;
-        const newExpiryDate = cells[5].querySelector("input").value;
-        
-        // Update editable cells with new text
-        cells[0].textContent = newItemName;
-        cells[1].textContent = newCategory;
-        cells[2].textContent = newQuantity;
-        cells[3].textContent = newUnit;
-        cells[4].textContent = newPrice;
-        cells[5].textContent = newExpiryDate;
-        
-        // Re-calculate Expiry status using the new Expiry Date
-        let newExpiryDisplay = "";
-        if (newExpiryDate) {
-          const expiryDate = new Date(newExpiryDate);
-          const now = new Date();
-          const timeDiff = expiryDate - now;
-          const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-          newExpiryDisplay = daysRemaining >= 0 ? `Expires in ${daysRemaining} days` : "Expired";
-        } else {
-          newExpiryDisplay = "No expiry date";
-        }
-        
-        // Re-calculate Stock status using the new Quantity
-        const newNumericQuantity = parseFloat(newQuantity);
-        const newStockStatus = newNumericQuantity <= 5 ? "Low stock" : "In stock";
-        
-        // Update the non-editable cells for Expiry status and Stock status
-        cells[6].innerHTML = `<span class="expiry-status">${newExpiryDisplay}</span>`;
-        cells[7].innerHTML = `<span class="status">${newStockStatus}</span>`;
-        
-        // Change button text back to "Edit"
-        editBtn.textContent = "Edit";
+  // Handle form submission (Add stock)
+  form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const itemData = {
+          name: document.getElementById("itemName").value.trim(),
+          category: document.getElementById("category").value.trim(),
+          quantity: parseFloat(document.getElementById("quantity").value),
+          unit: document.getElementById("unit").value.trim(),
+          price_per_unit: parseFloat(document.getElementById("price").value),
+          expiry_date: document.getElementById("expiryDate").value,
+          restaurant_id: 1
+      };
+
+      try {
+          const response = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(itemData),
+          });
+
+          if (!response.ok) throw new Error("Failed to add inventory");
+
+          const newItem = await response.json();
+          addRowToTable(newItem);
+          form.reset();
+      } catch (error) {
+          console.error("Error adding inventory:", error);
       }
-    });
-
-    form.reset();
   });
+
+  // Handle deletion
+  async function deleteInventoryItem(id, row) {
+      try {
+          const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+          if (!response.ok) throw new Error("Failed to delete item");
+          row.remove();
+      } catch (error) {
+          console.error("Error deleting inventory item:", error);
+      }
+  }
+
+  // Handle editing inventory item
+  function editInventoryItem(item, row) {
+      const editBtn = row.querySelector(".edit-btn");
+      const cells = row.querySelectorAll("td");
+
+      if (editBtn.textContent === "Edit") {
+          console.log("Editing:", item);
+
+          for (let i = 0; i < 6; i++) {
+              const cellValue = cells[i].textContent.trim();
+              cells[i].innerHTML = `<input type="text" value="${cellValue}" style="width: 100px; max-width: 120px;"/>`;
+          }
+
+          const rawExpiry = item.expiry_date || "";
+          cells[6].innerHTML = `<input type="text" value="${formatDateBritish(rawExpiry)}" style="width: 120px;" />`;
+
+          editBtn.textContent = "Save";
+      } else {
+          console.log("Saving:", item);
+
+          const updatedItem = {
+              name: cells[0].querySelector("input").value.trim(),
+              category: cells[1].querySelector("input").value.trim(),
+              quantity: parseFloat(cells[2].querySelector("input").value),
+              unit: cells[3].querySelector("input").value.trim(),
+              price_per_unit: parseFloat(cells[4].querySelector("input").value),
+              expiry_date: cells[6].querySelector("input").value || null,
+              restaurant_id: 1
+          };
+
+          updateInventoryItem(item.ingredient_id, updatedItem, row);
+      }
+  }
+
+  // Send PATCH request to update inventory
+  async function updateInventoryItem(id, updatedItem, row) {
+      try {
+          const response = await fetch(`${API_URL}/${id}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(updatedItem),
+          });
+
+          if (!response.ok) throw new Error("Failed to update inventory item");
+
+          const updatedData = await response.json();
+          addRowToTable(updatedData);
+          row.remove();
+      } catch (error) {
+          console.error("Error updating inventory item:", error);
+      }
+  }
+
+  // Initial fetch
+  fetchInventory();
 });

@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Fetch orders every 5 seconds
-  //setInterval(fetchOrders, 5000);
+  setInterval(fetchOrders, 5000);
   fetchOrders(); // Initial call
 });
+

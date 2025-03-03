@@ -16,7 +16,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"
     />
-    <script src="js/orderPage.js" defer></script>
+    <script src="js/liveOrder.js" defer></script>
     <title>Live Orders</title>
   </head>
 <body>
@@ -79,7 +79,9 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody id="orders-table-body">
+            <!-- Orders will be inserted here dynamically -->
+          </tbody>
         </table>
     </div>
 </body>

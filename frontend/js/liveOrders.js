@@ -1,45 +1,72 @@
-document.addEventListener("DOMContentLoaded", renderOrders);
+document.addEventListener("DOMContentLoaded", function () {
+    fetchLiveOrders();
+});
 
-async function renderOrders() {
-  const response = await fetch("http://localhost:3000/orders");
-  const orders = await response.json();
-  console.log(orders);
+// 🛒 Fetch live orders from the backend
+async function fetchLiveOrders() {
+    try {
+        const response = await fetch("http://localhost:3000/orders"); // Fetch from your backend
+        const orders = await response.json();
 
-  const tableBody = document.querySelector("#orderTable tbody");
-  tableBody.innerHTML = "";
-
-  orders.forEach((order) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-                    <td>${order.order_id}</td>
-                    <td>${order.order_time}</td>
-                    <td>${order.menu_items}</td>
-                    <td>${order.total_quantity}</td>
-                    <td>${order.order_notes}</td>
-                    <td class="status">${order.status}</td>
-                    <td><button class="status-btn" data-order-id="${order.order_id}">Change Status</button></td>
-                `;
-    tableBody.appendChild(row);
-  });
-
-  const buttons = document.querySelectorAll(".status-btn");
-  buttons.forEach((button) => {
-    button.addEventListener("click", handleStatusChange);
-  });
+        console.log("Fetched Orders:", orders); // Debugging
+        populateOrdersTable(orders);
+    } catch (error) {
+        console.error("Error fetching live orders:", error);
+    }
 }
 
-function handleStatusChange(event) {
-  const orderId = event.target.getAttribute("data-order-id");
-  const row = event.target.closest("tr");
-  const statusCell = row.querySelector(".status");
+//  Populate the live orders table
+function populateOrdersTable(orders) {
+    const tableBody = document.querySelector("tbody");
+    tableBody.innerHTML = ""; // Clear existing data
 
-  if (statusCell.textContent === "Pending") {
-    statusCell.textContent = "Completed";
-  } else {
-    statusCell.textContent = "Pending";
-  }
+    if (orders.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="text-center">No live orders found.</td></tr>`;
+        return;
+    }
 
-  console.log(
-    `Order ID ${orderId} status updated to ${statusCell.textContent}`
-  );
+    orders.forEach(order => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${order.order_id}</td>
+            <td>${new Date(order.order_time).toLocaleString()}</td>
+            <td>${order.menu_items || "N/A"}</td>
+            <td>${order.total_quantity}</td>
+            <td>${order.order_notes || "N/A"}</td>
+            <td>
+                <span class="${order.status === 'complete' ? 'text-success' : 'text-warning'}">
+                    ${order.status}
+                </span>
+            </td>
+            <td>
+                ${order.status === "preparing" ? 
+                    `<button class="btn btn-success btn-sm" onclick="markOrderComplete(${order.order_id})">
+                        Mark Complete
+                    </button>` 
+                : "Completed"}
+            </td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+
+// Update order status to 'complete'
+async function markOrderComplete(orderId) {
+    try {
+        const response = await fetch(`http://localhost:3000/orders/${orderId}/complete`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to update order status");
+        }
+
+        console.log(`Order ${orderId} marked as complete`);
+        fetchLiveOrders(); // Refresh the orders list
+    } catch (error) {
+        console.error("Error updating order status:", error);
+    }
 }

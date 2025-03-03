@@ -1,7 +1,9 @@
 $(document).ready(function () {
   $("#foodItem").select2();
   applyCustomStyles();
-  fetchMenuItems();
+  if ($("#orderItems").length) {
+    fetchMenuItems();
+  }
 
   $("#orderForm").on("change", "select", function () {
     $(this).select2();
@@ -13,7 +15,6 @@ async function fetchMenuItems() {
   try {
     const response = await fetch("http://localhost:3000/menu/names");
     const data = await response.json();
-    console.log(data);
 
     if (response.ok) {
       window.menuItems = data;
@@ -30,7 +31,6 @@ async function fetchMenuItems() {
 }
 
 function populateMenuItems(menuItems) {
-  console.log(menuItems);
   const foodItemSelect = $("#foodItem");
   foodItemSelect.empty();
   foodItemSelect.append(new Option("Select a menu item", "", true, true));

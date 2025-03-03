@@ -321,10 +321,6 @@ td:last-child {
   transition: background-color 0.3s;
 }
 
-.change-status-btn:hover {
-  background-color: #9a24eead;
-}
-
 .change-status-btn:disabled {
   background-color: gray;
   cursor: not-allowed;

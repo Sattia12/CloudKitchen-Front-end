@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const API_URL = "http://localhost:3000/analytics"; // Adjust if hosted
 
-        // 📦 Fetch Total Orders
+        // Fetch Total Orders
         fetch(`${API_URL}/live-order-status`)
         .then(response => response.json())
         .then(data => {
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("totalOrders").textContent = totalOrders;
         });
 
-    // 💰 Fetch Total Revenue
+    // Fetch Total Revenue
     fetch(`${API_URL}/revenue-trends`)
         .then(response => response.json())
         .then(data => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("totalRevenue").textContent = `$${totalRevenue.toFixed(2)}`;
         });
 
-    // ⚠️ Fetch Low Stock Items
+    // Fetch Low Stock Items
     fetch(`${API_URL}/stock-levels-category`)
         .then(response => response.json())
         .then(data => {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("lowStockCount").textContent = lowStockCount;
         });
 
-            // 📦 Fetch Preparing Orders Count
+            // Fetch Preparing Orders Count
     fetch(`${API_URL}/live-order-status`)
     .then(response => response.json())
     .then(data => {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // 🔥 Fetch Expiring Soon Count
+    // Fetch Expiring Soon Count
     fetch(`${API_URL}/expiring-soon`)
         .then(response => response.json())
         .then(data => {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("expiringSoonCount").textContent = expiringSoonCount;
         });
 
-    // 📈 Revenue Trends (Line Chart)
+    // Revenue Trends (Line Chart)
     fetch(`${API_URL}/revenue-trends`)
         .then(response => response.json())
         .then(data => {
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }], { title: "Revenue Trends Over Time" });
         });
 
-    // 🍕 Stock Value by Category (Pie Chart)
+    // Stock Value by Category (Pie Chart)
     fetch(`${API_URL}/stock-value-category`)
         .then(response => response.json())
         .then(data => {
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }], { title: "Stock Value by Category" });
         });
 
-    // 📊 Most Ordered Dishes (Bar Chart)
+    // Most Ordered Dishes (Bar Chart)
     fetch(`${API_URL}/most-ordered-dishes`)
         .then(response => response.json())
         .then(data => {
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }], { title: "Most Ordered Dishes" });
         });
 
-    // 📊 Most Used Ingredients (Horizontal Bar Chart)
+    // Most Used Ingredients (Horizontal Bar Chart)
     fetch(`${API_URL}/most-used-ingredients`)
         .then(response => response.json())
         .then(data => {
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }], { title: "Most Used Ingredients" });
         });
 
-    // 📈 Stock Usage Trend (Line Chart)
+    // Stock Usage Trend (Line Chart)
     fetch(`${API_URL}/stock-usage-trend`)
         .then(response => response.json())
         .then(data => {
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }], { title: "Stock Usage Trend" });
         });
 
-    // 📊 Stock Levels by Category (Stacked Bar Chart)
+    // Stock Levels by Category (Stacked Bar Chart)
     fetch(`${API_URL}/stock-levels-category`)
         .then(response => response.json())
         .then(data => {
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }], { title: "Stock Levels by Category" });
         });
 
- // 🍕 Dish Category Distribution (Pie Chart)
+ // Dish Category Distribution (Pie Chart)
 fetch("http://localhost:3000/analytics/dish-category-distribution")
 .then(response => response.json())
 .then(data => {
@@ -139,7 +139,7 @@ fetch("http://localhost:3000/analytics/dish-category-distribution")
 })
 .catch(error => console.error("Error fetching dish category distribution:", error));
 
-    // 🏆 Restaurant Performance (Stacked Bar Chart)
+    // Restaurant Performance (Stacked Bar Chart)
     fetch(`${API_URL}/restaurant-performance`)
         .then(response => response.json())
         .then(data => {
@@ -153,7 +153,7 @@ fetch("http://localhost:3000/analytics/dish-category-distribution")
             ], { title: "Restaurant Performance", barmode: "stack" });
         });
 
-    // 🍩 Live Order Status (Donut Chart)
+    // Live Order Status (Donut Chart)
     fetch(`${API_URL}/live-order-status`)
         .then(response => response.json())
         .then(data => {
@@ -165,7 +165,7 @@ fetch("http://localhost:3000/analytics/dish-category-distribution")
             }], { title: "Live Order Status" });
         });
 
-    // 📜 Expiring Soon (Simple List)
+    // Expiring Soon (Simple List)
     fetch(`${API_URL}/expiring-soon`)
         .then(response => response.json())
         .then(data => {
@@ -180,7 +180,7 @@ fetch("http://localhost:3000/analytics/dish-category-distribution")
             });
         });
 
-    // 🍕 Ingredient Category Distribution (Pie Chart)
+    // Ingredient Category Distribution (Pie Chart)
     fetch(`${API_URL}/ingredient-category-distribution`)
         .then(response => response.json())
         .then(data => {

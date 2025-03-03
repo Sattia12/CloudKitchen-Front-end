@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   const ordersTable = document.getElementById("orders-table-body");
 
-  // Function to fetch and update orders
   function fetchOrders() {
-    fetch("http://localhost:3000/orders") // API URL
+    fetch("http://localhost:3000/orders")
       .then((response) => response.json())
       .then((orders) => {
-        ordersTable.innerHTML = ""; // Clear existing rows
+        ordersTable.innerHTML = "";
         orders.forEach((order) => {
           const row = `<tr>
             <td>${order.order_id}</td>
@@ -21,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error fetching orders:", error));
   }
 
-  // Fetch orders every 5 seconds
   setInterval(fetchOrders, 5000);
-  fetchOrders(); // Initial call
+  fetchOrders();
 });

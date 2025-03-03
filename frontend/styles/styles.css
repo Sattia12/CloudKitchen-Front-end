@@ -112,3 +112,7 @@ h2 {
     transform: translateY(-50%);
 }
 
+table thead th {
+    color: #6a0dad !important;
+    font-weight: bold !important;
+}

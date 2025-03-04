@@ -13,7 +13,7 @@ html, body {
 
 body {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .no-auth::before {
     filter: blur(6px);

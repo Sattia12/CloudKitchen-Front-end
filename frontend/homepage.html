@@ -4,43 +4,178 @@
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/homepage.css" />
-    
+
     <title>CloudKitchen</title>
   </head>
   <body>
-    <section class="top">
-
-    <div class="container">
-      <!-- Left Side -->
-      <div class="left-side">
-        <h6 class="tagline">Restaurant Management System</h6>
-        <p class="description">
-          That simplifies day to day work for restaurant employees
-        </p>
-      </br>
-        <h1>CloudKitchen</h1>
-        <p class="subtitle">by ULTRAVIOLET</p>
-
-        <div class="btn-container">
-          <a href="login.html" class="btn">LOG IN</a>
-          <a href="register.html" class="btn">REGISTER</a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="homepage.html">Cloud Kitchen</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <div class="mx-auto w-50">
+            <ul class="navbar-nav me-auto w-100 justify-content-around">
+              <li class="nav-item">
+                <a class="nav-link" href="#top">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#features">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#pricing">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#testimonials">Testimonials</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex">
+            <a class="btn btn-outline-light ms-auto" href="homepage.html"
+              >Logout</a
+            >
+          </div>
         </div>
       </div>
+    </nav>
+    <section class="top">
+      <div class="container-fluid">
+        <!-- Left Side -->
+        <div class="left-side">
+          <h6 class="tagline">Restaurant Management System</h6>
+          <p class="description">
+            That simplifies day to day work for restaurant employees
+          </p>
+          <br />
+          <h1>CloudKitchen</h1>
+          <p class="subtitle">by ULTRAVIOLET</p>
 
-      <!-- Right Side -->
-      <div class="right-side">
-        <!-- Background pattern displayed here -->
+          <div class="btn-container">
+            <a href="login.html" class="btn">LOG IN</a>
+            <a href="register.html" class="btn">REGISTER</a>
+          </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="right-side">
+          <!-- Background pattern displayed here -->
+        </div>
       </div>
-
-    </div>
     </section>
+    <br />
     <section class="bottom">
-      <h2>Hey</h2>
+      <section id="features">
+        <h2>Why Choose Our App?</h2>
+        <div class="features-container">
+          <article class="feature">
+            <img src="assets/stock-tracking.png" alt="Order Tracking Icon" />
+            <h3>Seamless Order Tracking</h3>
+            <p>Orders sync instantly between FOH and kitchen.</p>
+          </article>
+          <article class="feature">
+            <img
+              src="assets/inventory-threshold-alerts-benefits.png"
+              alt="Inventory Alerts Icon"
+            />
+            <h3>Real-Time Inventory Alerts</h3>
+            <p>Never run out of stock with automated tracking.</p>
+          </article>
+          <article class="feature">
+            <img
+              src="assets/inventory-threshold-alerts-and-actionable-insights.png"
+              alt="Reports & Insights Icon"
+            />
+            <h3>Custom Reports & Insights</h3>
+            <p>Optimize operations with data-driven decisions.</p>
+          </article>
+          <article class="feature">
+            <img src="assets/multi-platform.png" alt="Multi-Device Icon" />
+            <h3>Multi-Device Access</h3>
+            <p>Works on desktops, tablets, and smartphones.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="pricing-container" id="pricing">
+        <div class="pricing-plan popular">
+          <h3>Pro Plan</h3>
+          <p><strong>£69/month</strong></p>
+          <ul>
+            <li>Real-time inventory tracking</li>
+            <li>Detailed reports & analytics</li>
+            <li>Priority support</li>
+          </ul>
+          <button><a href="register.html">Try for Free</a></button>
+        </div>
+
+        <div class="pricing-plan">
+          <h3>Enterprise Plan</h3>
+          <p><strong>Custom Pricing</strong></p>
+          <ul>
+            <li>All features included</li>
+            <li>Custom integrations</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <button>Contact Us</button>
+        </div>
+      </section>
     </section>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <p>Email: support@ultraviolets.com</p>
+          <p>Phone: +(44) 766 002 2656</p>
+          <p>Address: 123 Food Street, London, England, United Kingdom</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#top">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#footer">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">
+        &copy; 2025 Cloud Kitchen. All Rights Reserved.
+      </p>
+    </footer>
   </body>
 </html>

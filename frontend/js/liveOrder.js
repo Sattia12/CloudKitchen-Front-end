@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <td>${order.order_notes}</td>
             <td class="order-status">${order.status}</td>
             <td>
-              <button class="change-status-btn" data-id="${order.order_id}" ${order.status === "complete" ? "disabled" : ""}>
+              <button class="change-status-btn" data-id="${order.order_id}" ${
+            order.status === "complete" ? "disabled" : ""
+          }>
                 Change Status
               </button>
             </td>
@@ -49,7 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         if (data.status) {
           // Update the UI
-          button.closest("tr").querySelector(".order-status").textContent = data.status;
+          button.closest("tr").querySelector(".order-status").textContent =
+            data.status;
           button.disabled = true; // Disable button after updating
         }
       })

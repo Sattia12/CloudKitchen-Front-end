@@ -66,7 +66,6 @@ h2 {
 .btn-primary {
     background-color: #7c0fc9ce;
     border-color: var(--primary-color);
-    margin-top: 15px;
 }
 
 .btn-primary:hover {

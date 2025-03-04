@@ -5,34 +5,36 @@
   box-sizing: border-box;
 }
 :root {
-    --primary-color: #6a0dad;
-    --secondary-color: #8b5cf6;
-    --tertiary-color: white;
+  --primary-color: #6a0dad;
+  --secondary-color: #8b5cf6;
+  --tertiary-color: white;
 }
 
 .navbar {
   position: fixed;
   width: 100vw;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    height: 60px;
-    
-
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  height: 60px;
 }
 
 .navbar .nav-link {
-    color: #f5e1f1;
+  color: #f5e1f1;
 }
 
 .nav-link:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .navbar-brand {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #ffffff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #ffffff;
 }
 
 /* Make sure the page fills the browser window */
@@ -55,7 +57,11 @@ body {
 /* Left side styling */
 .left-side {
   flex: 60%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Light purple background */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  ); /* Light purple background */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,159 +113,164 @@ body {
 .right-side {
   flex: 40%;
   background-color: #fff;
-  background-image: url('../assets/background.png'); /* Replace with your actual pattern */
+  background-image: url("../assets/background.png"); /* Replace with your actual pattern */
   background-repeat: repeat;
   background-size: cover;
 }
 
 #features {
-    width: 90%;
-    margin: 50px auto;
-    text-align: center;
-    background-color: rgba(163, 110, 209, 0.4);
-
+  width: 90%;
+  margin: 50px auto;
+  text-align: center;
+  background-color: rgba(163, 110, 209, 0.4);
 }
 
 .features-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2-column layout */
-    gap: 40px; /* Space between items */
-    justify-content: center;
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+  gap: 40px; /* Space between items */
+  justify-content: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .feature {
-    background: #f9f9f9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .feature:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .feature img {
-    width: 150px;
-    height: 130px;
-    margin-bottom: 15px;
+  width: 150px;
+  height: 130px;
+  margin-bottom: 15px;
 }
 
 .feature h3 {
-    font-size: 1.5em;
-    color: #333;
+  font-size: 1.5em;
+  color: #333;
 }
 
 .feature p {
-    font-size: 1.1em;
-    color: #555;
+  font-size: 1.1em;
+  color: #555;
 }
 .pricing-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    padding: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 40px;
 }
 
 .pricing-plan {
-    background: #f9f9f9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    width: 300px;
-    text-align: center;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  width: 350px;
+  height: 400px;
+  text-align: center;
 }
 
 .pricing-plan:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .pricing-plan h3 {
-    font-size: 1.5em;
-    color: #333;
+  font-size: 1.5em;
+  color: #333;
 }
 
 .pricing-plan p {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #444;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #444;
 }
 
 .pricing-plan ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .pricing-plan ul li {
-    padding: 8px 0;
-    font-size: 1em;
-    color: #666;
+  padding: 8px 0;
+  font-size: 1em;
+  color: #666;
 }
 
 .pricing-plan button {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 .pricing-plan button:hover {
-    background: var(--primary-color);
+  background: var(--primary-color);
 }
 
 .popular {
-    border: 3px solid var(--secondary-color);
+  border: 3px solid var(--secondary-color);
+}
+
+button a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .footer {
-    background: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
+  background: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
 }
 
 .footer-section {
-    min-width: 250px;
-    margin: 10px;
+  min-width: 250px;
+  margin: 10px;
 }
 
 .footer-section h4 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    color: var(--primary-color);
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: var(--primary-color);
 }
 
 .footer-section ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .footer-section ul li a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .footer-bottom {
-    margin-top: 20px;
-    font-size: 0.9em;
+  margin-top: 20px;
+  font-size: 0.9em;
 }
 
 /* Responsive: stack columns on narrow screens */

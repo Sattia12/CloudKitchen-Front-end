@@ -13,24 +13,27 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 body {
     position: relative;
-    overflow: hidden;
+    background: #f5f5f5;
 }
 
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(/frontend/assets/background.png) no-repeat center center;
-    background-size: cover;
-    opacity: 0.4;
-    z-index: -1;
+/* Ensure the dashboard can scroll */
+main {
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* Style improvements for charts */
+.chart-container {
+    margin-bottom: 50px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
 }
 
 .navbar {
@@ -51,54 +54,21 @@ body::before {
     font-size: 1.5rem;
     color: #ffffff;
 }
-body {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
 
-.navbar {
-    background: linear-gradient(135deg, #6a0dad, #8b5cf6);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.navbar .nav-link {
-    color: #f5e1f1;
-}
-
-.nav-link:hover {
-    color: #ffffff;
-}
-
-.navbar-brand {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #ffffff;
-}
-
-.dash-container {
+/* Ensures all graphs have enough space */
+.container {
+    max-width: 1200px;
     background: #faf5ff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 70vw;
 }
 
-.dashboard-container {
-    background-color: rgba(210, 149, 208, 0.6); /* Light purple */
-    padding: 30px;
-    border-radius: 15px;
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 15px; /* Space between buttons */
-        overflow-x: auto;
-    white-space: nowrap;
-    padding: 10px;
-    width: 50vw;
-}
-
+/* Dashboard button styles */
 .dashboard-button {
-    background-color: #6a0dad; /* Dark purple */
+    background-color: #6a0dad;
     color: white;
-    width: 150px; /* Ensures square buttons */
+    width: 150px;
     height: 150px;
     display: flex;
     align-items: center;
@@ -107,18 +77,12 @@ body {
     border-radius: 10px;
     font-weight: bold;
     text-wrap: balance;
-    text-decoration: none; /* Remove underline */
+    text-decoration: none;
 }
+
 .btn:hover {
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
-}
-.container {
-    max-width: 800px;
-    background: #faf5ff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -131,4 +95,83 @@ h2 {
     border-radius: 5px;
     padding: 10px;
     font-size: 1rem;
+}
+
+.metric-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff; /* Blue for numbers */
+}
+
+/* Dashboard Metric Cards */
+.metrics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.metric-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 200px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #6a0dad;
+    margin-bottom: 10px;
+}
+
+/* Style for Expiring Soon Title */
+.expiring-soon-title {
+    color: red !important;
+    font-weight: bold;
+    margin-bottom: 15px; /* Adds spacing below the title */
+}
+
+/* Style for Expiring Soon Count */
+#expiringSoonCount {
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 15px; /* Adds spacing below the count */
+    display: block; /* Ensures it's on a new line */
+}
+
+/* Style for Expiring Soon List */
+#expiringSoonList {
+    margin-top: 15px; /* Adds space above the list */
+    padding: 10px; /* Adds spacing inside the list */
+}
+
+/* Style for Expiring Soon List Items */
+#expiringSoonList .list-group-item {
+    background-color: #ffebee; /* Light red background */
+    color: red;
+    font-weight: bold;
+    border-left: 5px solid red;
+    margin-bottom: 8px; /* Adds spacing between each item */
+    padding: 10px 15px; /* Adds padding inside each item */
+    border-radius: 5px; /* Makes the corners softer */
+}
+
+.chart-container {
+    background: #fff; /* White background */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    border-left: 5px solid var(--primary-color); /* Purple accent border */
+    margin-bottom: 30px; /* Space between graphs */
 }

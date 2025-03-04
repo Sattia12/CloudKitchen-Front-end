@@ -10,23 +10,51 @@
     --tertiary-color: white;
 }
 
+.navbar {
+  position: fixed;
+  width: 100vw;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    height: 60px;
+    
+
+}
+
+.navbar .nav-link {
+    color: #f5e1f1;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
 /* Make sure the page fills the browser window */
 html,
 body {
-  height: 100%;
   font-family: "Montserrat", serif;
 }
-
 /* Container that holds both sides */
-.container {
+.container-fluid {
   display: flex;
   width: 100%;
   height: 100vh; /* Full viewport height */
+  padding: 0; /* Remove any unwanted padding */
+  margin: 0; /* Remove unwanted margins */
+}
+#features {
+  padding-top: 100px;
 }
 
 /* Left side styling */
 .left-side {
-  width: 60%;
+  flex: 60%;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Light purple background */
   display: flex;
   flex-direction: column;
@@ -77,7 +105,7 @@ body {
 
 /* Right side styling (pattern background) */
 .right-side {
-  width: 50%;
+  flex: 40%;
   background-color: #fff;
   background-image: url('../assets/background.png'); /* Replace with your actual pattern */
   background-repeat: repeat;
@@ -86,7 +114,7 @@ body {
 
 /* Responsive: stack columns on narrow screens */
 @media (max-width: 768px) {
-  .container {
+  .container-fluid {
     flex-direction: column;
   }
   .left-side,

@@ -15,13 +15,16 @@ async function fetchMenuItems() {
   try {
     const response = await fetch("http://localhost:3000/menu/names");
     const data = await response.json();
-    console.log("Menu Items Data:", data); 
+    console.log("Menu Items Data:", data);
 
     if (response.ok) {
       window.menuItems = data;
       populateMenuItems(data); // Load into dropdown
     } else {
-      console.error("Error fetching menu items:", data.error || "Unknown error");
+      console.error(
+        "Error fetching menu items:",
+        data.error || "Unknown error"
+      );
     }
   } catch (error) {
     console.error("Failed to connect to the server:", error.message);
@@ -52,13 +55,17 @@ function applyCustomStyles() {
     "box-sizing": "border-box",
   });
 
-  $(".select2-container--default .select2-selection--single .select2-selection__rendered").css({
+  $(
+    ".select2-container--default .select2-selection--single .select2-selection__rendered"
+  ).css({
     "line-height": "calc(2.25rem + 2px)",
     "padding-top": "0",
     "padding-bottom": "0",
   });
 
-  $(".select2-container--default .select2-selection--single .select2-selection__arrow").css({
+  $(
+    ".select2-container--default .select2-selection--single .select2-selection__arrow"
+  ).css({
     "border-left": "none",
     "border-radius": "0 5px 5px 0",
     right: "0",
@@ -123,70 +130,74 @@ function populateMenuItemsDropdown(selectElement) {
 
   $(selectElement).select2();
 }
-document.getElementById("orderForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+document
+  .getElementById("orderForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  let orderItems = [];
-  document.querySelectorAll("#orderItems .row").forEach((row) => {
-    let foodItem = row.querySelector("select[name='foodItem']").value;
-    let quantity = row.querySelector("input[name='quantity']").value;
+    let orderItems = [];
+    document.querySelectorAll("#orderItems .row").forEach((row) => {
+      let foodItem = row.querySelector("select[name='foodItem']").value;
+      let quantity = row.querySelector("input[name='quantity']").value;
 
-    if (foodItem && quantity > 0) {
-      orderItems.push({ foodItem, quantity });
-    }
-  });
-
-  const tableNumber = document.getElementById("tableNumber").value;
-  const orderNotes = document.getElementById("orderNotes").value;
-
-  if (!tableNumber) {
-    alert("⚠️ Please enter a table number.");
-    return;
-  }
-
-  if (orderItems.length === 0) {
-    alert("⚠️ Please add at least one menu item.");
-    return;
-  }
-
-  let orderData = {
-    table_number: tableNumber,
-    user_id: 1, // Replace with actual user logic
-    restaurant_id: 1,
-    items: orderItems,
-    order_notes: orderNotes || "No notes provided",
-  };
-
-  console.log("Order Data Being Sent:", JSON.stringify(orderData, null, 2));
-
-  try {
-    console.log("Sending Order Data:", orderData); // Debugging
-
-    let response = await fetch("http://localhost:3000/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderData),
+      if (foodItem && quantity > 0) {
+        orderItems.push({ foodItem, quantity });
+      }
     });
 
-    let text = await response.text(); // First get the raw response text
-    console.log("Response Text:", text); // Debugging
+    const tableNumber = document.getElementById("tableNumber").value;
+    const orderNotes = document.getElementById("orderNotes").value;
 
-    let data;
+    if (!tableNumber) {
+      alert("⚠️ Please enter a table number.");
+      return;
+    }
+
+    if (orderItems.length === 0) {
+      alert("⚠️ Please add at least one menu item.");
+      return;
+    }
+
+    let orderData = {
+      table_number: tableNumber,
+      user_id: 1, // Replace with actual user logic
+      restaurant_id: 1,
+      items: orderItems,
+      order_notes: orderNotes || "No notes provided",
+    };
+
+    console.log("Order Data Being Sent:", JSON.stringify(orderData, null, 2));
+
     try {
-      data = JSON.parse(text); // Try parsing the text as JSON
-    } catch (error) {
-      throw new Error("⚠️ Server returned invalid JSON. Response was: " + text);
-    }
+      console.log("Sending Order Data:", orderData); // Debugging
 
-    if (response.ok) {
-      alert("Order placed successfully!");
-      document.getElementById("orderForm").reset();
-      document.getElementById("orderItems").innerHTML = "";
-      document.getElementById("tableNumber").value = "";
-    } else {
-      alert("Error: " + (data.error || "Unknown error"));
+      let response = await fetch("http://localhost:3000/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
+
+      let text = await response.text(); // First get the raw response text
+      console.log("Response Text:", text); // Debugging
+
+      let data;
+      try {
+        data = JSON.parse(text); // Try parsing the text as JSON
+      } catch (error) {
+        throw new Error(
+          "⚠️ Server returned invalid JSON. Response was: " + text
+        );
+      }
+
+      if (response.ok) {
+        alert("Order placed successfully!");
+        document.getElementById("orderForm").reset();
+        document.getElementById("orderItems").innerHTML = "";
+        document.getElementById("tableNumber").value = "";
+      } else {
+        alert("Error: " + (data.error || "Unknown error"));
+      }
+    } catch (error) {
+      alert("Failed to connect to the server: " + error.message);
     }
-  } catch (error) {
-    alert("Failed to connect to the server: " + error.message);
-  }
-});
+  });

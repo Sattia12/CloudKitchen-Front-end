@@ -81,39 +81,31 @@
     </nav>
 
     <div class="container mt-5">
-      <div class="">
-          <h2 class="text-center mb-4">Create a New Order</h2>
-
-          <form id="orderForm">
-              <!-- Table Number -->
-              <div class="mb-3">
-                  <label for="tableNumber" class="form-label">Table Number</label>
-                  <input type="number" class="form-control" id="tableNumber" name="tableNumber" placeholder="Enter table number" min="1" required>
-              </div>
-
-              <!-- Order Items Section -->
-              <h4 class="mt-4">Order Items</h4>
-              <div id="orderItems"></div>
-
-              <!-- Add Item Button -->
-              <button type="button" class="btn btn-secondary mt-2" onclick="addItem()">
-                  ➕ Add Item
-              </button>
-
-              <!-- Order Notes -->
-              <div class="mt-4">
-                  <label for="orderNotes" class="form-label">Notes</label>
-                  <textarea class="form-control" id="orderNotes" rows="3" placeholder="Enter any notes here..."></textarea>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="text-center mt-4">
-                  <button type="submit" class="btn btn-primary" id="order-submit">
-                      Place Order
-                  </button>
-              </div>
-          </form>
+      <h2>Orders</h2>
+  
+      <div class="row mb-3">
+          <div class="col-md-4">
+              <label for="tableNumber" class="form-label">Table Number</label>
+              <input type="number" class="form-control" id="tableNumber" name="tableNumber" placeholder="Enter table number" min="1" required>
+          </div>
       </div>
+  
+      <form id="orderForm">
+          <h4 class="mt-4">Order Items</h4>
+          <div id="orderItems"></div>
+          
+          <button type="button" class="btn btn-secondary mt-2" onclick="addItem()">Add Item</button>
+  
+          <div class="mt-4">
+              <h3>Notes</h3>
+              <textarea class="form-control" id="orderNotes" rows="4" placeholder="Enter any notes here..."></textarea>
+          </div>
+          
+          <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary" id="order-submit">Place Order</button>
+          </div>
+      </form>
   </div>
-  </body>
+  
+</body>
 </html>

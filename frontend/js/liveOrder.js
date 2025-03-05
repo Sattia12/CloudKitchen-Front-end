@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${order.order_id}</td>
-            <td>${order.order_time}</td>
+            <td>${formatDateTimeBritish(order.order_time)}</td>
             <td>${order.total_quantity}</td>
             <td>${order.menu_items}</td>
             <td>${order.order_notes}</td>
@@ -58,6 +58,21 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => console.error("Error updating order status:", error));
   }
+
+  function formatDateTimeBritish(dateString) {
+    if (!dateString) return "N/A";
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) return dateString; // Handle invalid dates
+
+    // Format date (DD/MM/YYYY)
+    const formattedDate = date.toLocaleDateString("en-GB");
+
+    // Format time (HH:MM:SS)
+    const formattedTime = date.toLocaleTimeString("en-GB", { hour12: false });
+
+    return `${formattedDate} ${formattedTime}`;
+}
 
   // Fetch orders every 5 seconds
   setInterval(fetchOrders, 5000);

@@ -1,20 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("th[data-sort]").forEach(th => {
+        th.addEventListener("click", () => {
+            const column = th.getAttribute("data-sort");
+            sortInventory(column);
+        });
+    });
   const form = document.querySelector(".horizontal-form");
   const tbody = document.querySelector("table tbody");
-  const API_URL = "http://localhost:3000/inventory"; // Update if hosted elsewhere
+  const API_URL = "http://localhost:3000/inventory";
+  let inventoryData = [];
+  let currentSortDirection = "asc"; // Default sorting direction
 
   // Fetch and populate inventory table
-  async function fetchInventory() {
-      try {
-          const response = await fetch(API_URL);
-          const inventory = await response.json();
-          tbody.innerHTML = ""; // Clear table
+  async function fetchInventory(sortBy = "name", direction = "asc") {
+    try {
+        const response = await fetch(`${API_URL}?sortBy=${sortBy}&direction=${direction}`);
+        const inventoryData = await response.json();
 
-          inventory.forEach(addRowToTable);
-      } catch (error) {
-          console.error("Error fetching inventory:", error);
-      }
-  }
+        // Clear existing table and render new data
+        tbody.innerHTML = "";
+        inventoryData.forEach(addRowToTable);
+    } catch (error) {
+        console.error("Error fetching inventory:", error);
+    }
+}
 
   // Format date to British format (DD/MM/YYYY)
   function formatDateBritish(dateString) {
@@ -22,6 +31,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const date = new Date(dateString);
       return isNaN(date.getTime()) ? dateString : date.toLocaleDateString("en-GB");
   }
+
+  function sortInventory(column) {
+    currentSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
+    
+    fetchInventory(column, currentSortDirection); // Fetch sorted data from backend
+
+    // Update all headers and set sorting indicator
+    document.querySelectorAll("th[data-sort]").forEach(th => {
+        if (th.getAttribute("data-sort") === column) {
+            th.innerHTML = `${th.textContent.replace("▲", "").replace("▼", "").trim()} ${currentSortDirection === "asc" ? "▲" : "▼"}`;
+        } else {
+            th.innerHTML = th.textContent.replace("▲", "").replace("▼", "").trim(); // Reset others
+        }
+    });
+}
 
   // Add row to inventory table
   function addRowToTable(item) {
@@ -172,6 +196,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 
-  // Initial fetch
   fetchInventory();
 });

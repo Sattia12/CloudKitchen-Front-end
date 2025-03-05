@@ -325,3 +325,13 @@ td:last-child {
   background-color: gray;
   cursor: not-allowed;
 }
+
+th[data-sort] {
+  cursor: pointer; 
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+
+th[data-sort]:hover {
+  color: #6a0dad; 
+}

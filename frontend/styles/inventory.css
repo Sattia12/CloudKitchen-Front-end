@@ -15,6 +15,8 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
+    background: url(../assets/background.png) no-repeat center center;
+    background-size: cover;
 }
 
 body {
@@ -30,8 +32,6 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url(/frontend/assets/background.png) no-repeat center center;
-    background-size: cover;
     opacity: 0.4;
     z-index: -1;
 }
@@ -66,6 +66,7 @@ body::before {
 h1 {
   color: var(--primary-color);
     text-align: center;
+    padding-bottom: 20px;
 }
 h2 {
     color: var(--primary-color);
@@ -127,7 +128,7 @@ td:last-child {
   white-space: nowrap; /* Prevent buttons from stacking */
 }
 
-.action-btn {
+/* .action-btn {
   display: inline-block;
   margin-right: 5px;
   background-color: #f44336;
@@ -150,8 +151,37 @@ td:last-child {
 
 .edit-btn:hover {
   background-color: #388e3c;
+} */
+.action-btn {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s, opacity 0.3s;
 }
 
+/* Muted Edit Button (Soft Green) */
+.edit-btn {
+  background-color: #8bc34a; /* Softer green */
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #689f38; /* Darker green on hover */
+}
+
+/* Muted Remove Button (Soft Red) */
+.remove-btn {
+  background-color: #e57373; /* Softer red */
+  color: white;
+}
+
+.remove-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
 
 
 /* Status badge */
@@ -229,7 +259,75 @@ td:last-child {
   outline: none;
 }
 
+
+.horizontal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased spacing for readability */
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px; /* Even spacing between input fields */
+  flex-wrap: wrap;
+}
+
+.form-row label {
+  min-width: 150px; /* Ensures labels are the same width */
+  text-align: right;
+  font-weight: bold;
+}
+
+.form-row input {
+  flex: 1;
+  width: 100%;
+  max-width: 250px; /* Adjust as needed */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
 .save-btn {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #81c784; /* Softer green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, opacity 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #66a76f; /* Darker soft green on hover */
+}
+
+/* .save-btn {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.save-btn:hover {
+  background-color: #388e3c;
+} */
+
+/* .save-btn {
   background-color: #4caf50;
   color: #fff;
   border: none;
@@ -241,37 +339,38 @@ td:last-child {
 
 .save-btn:hover {
   background-color: #388e3c;
-}
+} */
 
-/* Existing .form-section styles can remain, but we add new styles for .horizontal-form */
+
+/* Existing .form-section styles can remain, but we add new styles for .horizontal-form
 .horizontal-form .form-row {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-/* Space out each label and input pair */
+ Space out each label and input pair 
 .horizontal-form .form-row label {
   margin-right: 0.5rem;
-  min-width: 100px; /* Ensures labels have consistent width */
+  min-width: 100px;  Ensures labels have consistent width 
   font-weight: bold;
 }
 
-/* Inputs can grow to fill space or you can fix widths */
+ Inputs can grow to fill space or you can fix widths 
 .horizontal-form .form-row input {
-  margin-right: 2rem; /* Spacing between this input and the next label */
+  margin-right: 2rem; Spacing between this input and the next label 
   flex: 1;
-  max-width: 200px; /* Adjust as needed */
+  max-width: 200px;  Adjust as needed 
   min-height: 24px;
 }
 
-/* Adjust the button so it’s on its own line or inline, whichever you prefer */
+/* Adjust the button so it’s on its own line or inline, whichever you prefer 
 .horizontal-form button.save-btn {
   margin-top: 1rem;
-  /* If you want the button on a new line: */
+   If you want the button on a new line: 
   display: block;
-  /* If you want it inline with the second row: remove display:block */
-}
+  If you want it inline with the second row: remove display:block
+}*/
 
 #expiryDate {
   color: grey;
@@ -335,3 +434,4 @@ th[data-sort] {
 th[data-sort]:hover {
   color: #6a0dad; 
 }
+

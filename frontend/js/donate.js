@@ -1,8 +1,33 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("locationSearchBtn").addEventListener("click", searchByLocation);
     document.getElementById("ingredientSearchBtn").addEventListener("click", searchByIngredient);
+    const userEmail = localStorage.getItem("email");
+    const usernameDisplay = document.querySelector("#username");
+    const authButton = document.querySelector("#auth-btn");
+
+    if (userEmail) {
+      usernameDisplay.textContent = userEmail;
+      authButton.textContent = "Log Out";
+  
+      authButton.removeEventListener("click", logout); // Ensure no duplicate listeners
+      authButton.addEventListener("click", logout); //  Attach logout function
+    } else {
+      usernameDisplay.textContent = "Guest";
+      authButton.textContent = "Log In";
+  
+      authButton.removeEventListener("click", loginRedirect); //  Ensure no duplicate listeners
+      authButton.addEventListener("click", loginRedirect); //  Attach login function
+    }
+  
+  function loginRedirect() {
+      window.location.href = "login.html"; // Redirect to login page
+  }
+
+
     fetchFoodBanks();
   });
+
+
 
   // Initialize the Leaflet map
   const map = L.map('map').setView([51.5, -0.12], 7);
@@ -28,7 +53,6 @@ attribution: '© OpenStreetMap & Carto'
           const marker = L.marker([lat, lng]).bindPopup(`
             <strong>${name}</strong><br>
             📍 ${address}<br>
-            🛒 <strong>Needs:</strong> ${needs}<br>
             ${googleMapsLink}
           `);
           markers.addLayer(marker);
@@ -37,7 +61,7 @@ attribution: '© OpenStreetMap & Carto'
 
       map.addLayer(markers);
       
-      renderResults(foodBanks);
+      renderResultsLocation(foodBanks);
     } catch (error) {
       console.error("Error fetching food bank data:", error);
     }
@@ -53,7 +77,7 @@ attribution: '© OpenStreetMap & Carto'
 
       if (!foodbanks.length) return alert("No food banks found in this area.");
       
-      renderResults(foodbanks);
+      renderResultsLocation(foodbanks);
     } catch (error) {
       console.error("Error fetching location data:", error);
     }
@@ -104,6 +128,29 @@ attribution: '© OpenStreetMap & Carto'
     });
   }
 
+  function renderResultsLocation(data, ingredientKeyword = "") {
+    const resultsList = document.getElementById("resultsList");
+    resultsList.innerHTML = "";
+    
+    data.forEach(item => {
+      const needsText = (typeof item.needs === "object") ? item.needs.needs : item.needs;
+      const highlightedNeeds = ingredientKeyword ? needsText.replace(new RegExp(`(${ingredientKeyword})`, "gi"), `<span class="highlight">$1</span>`) : needsText;
+      const googleMapsLink = item.lat_lng ? `<a href="https://www.google.com/maps?q=${item.lat_lng}" target="_blank">View on Google Maps</a>` : "";
+
+      const websiteLink = item.urls && item.urls.homepage 
+          ? `<a href="${item.urls.homepage}" target="_blank">Visit Website</a>` 
+          : "No website available";
+
+      const li = document.createElement("li");
+      li.className = "list-group-item";
+      li.innerHTML = `
+          <strong>${item.name}</strong><br>
+          📍 ${item.address}<br>
+          🔗 ${websiteLink} | ${googleMapsLink}
+      `;        resultsList.appendChild(li);
+    });
+  }
+
   async function searchLocation() {
     const input = document.getElementById("searchInput").value.trim();
     if (!input) return alert("Enter a postcode or address.");
@@ -118,3 +165,10 @@ attribution: '© OpenStreetMap & Carto'
       console.error("Error finding location:", error);
     }
   }
+
+  function logout() {
+    console.log("Logging out...");
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.href = "homepage.html";
+}  

@@ -14,6 +14,8 @@ html, body {
     height: 100%;
     width: 100%;
     overflow-y: auto; /* Enable vertical scrolling */
+    background: url(../assets/background.png) no-repeat center center;
+    background-size: cover;
 }
 
 body {
@@ -84,7 +86,11 @@ main {
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
 }
-
+h1 {
+    color: var(--primary-color);
+      text-align: center;
+      padding-bottom: 20px;
+  }
 h2 {
     color: #6a0dad;
     text-align: center;

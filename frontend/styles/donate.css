@@ -54,7 +54,10 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
+h1 {
+    color: var(--primary-color);
+      text-align: center;
+  }
 .highlight { background-color: yellow; }
 #map { height: 500px; width: 100%; margin-top: 20px; }
 #search-container { display: flex; gap: 10px; margin-bottom: 15px; }

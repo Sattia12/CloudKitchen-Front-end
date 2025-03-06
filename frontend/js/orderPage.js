@@ -9,11 +9,44 @@ $(document).ready(function () {
     $(this).select2();
     applyCustomStyles();
   });
+  const userEmail = localStorage.getItem("email");
+  const usernameDisplay = $("#username");
+  const authButton = $("#auth-btn");
+
+  if (userEmail) {
+      usernameDisplay.text(userEmail);
+      authButton.text("Log Out");
+
+      authButton.off("click").on("click", logout); // Prevents duplicate event listeners
+  } else {
+      usernameDisplay.text("Guest");
+      authButton.text("Log In");
+
+      authButton.off("click").on("click", loginRedirect); // Prevents duplicate event listeners
+  }
+
+  function loginRedirect() {
+      window.location.href = "login.html"; // Redirect to login page
+  }
+
+  function logout() {
+      console.log("Logging out...");
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      window.location.href = "homepage.html";
+  }
 });
 
 async function fetchMenuItems() {
+
+  const options = {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  };
+
   try {
-    const response = await fetch("http://localhost:3000/menu/names");
+    const response = await fetch("http://localhost:3000/menu/names", options);
     const data = await response.json();
     console.log("Menu Items Data:", data);
 
@@ -149,18 +182,18 @@ document
     const orderNotes = document.getElementById("orderNotes").value;
 
     if (!tableNumber) {
-      alert("⚠️ Please enter a table number.");
+      alert("Please enter a table number.");
       return;
     }
 
     if (orderItems.length === 0) {
-      alert("⚠️ Please add at least one menu item.");
+      alert("Please add at least one menu item.");
       return;
     }
 
     let orderData = {
       table_number: tableNumber,
-      user_id: 1, // Replace with actual user logic
+      user_id: 1,
       restaurant_id: 1,
       items: orderItems,
       order_notes: orderNotes || "No notes provided",
@@ -169,20 +202,26 @@ document
     console.log("Order Data Being Sent:", JSON.stringify(orderData, null, 2));
 
     try {
-      console.log("Sending Order Data:", orderData); // Debugging
+      console.log("Sending Order Data:", orderData);
+
+
+
 
       let response = await fetch("http://localhost:3000/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token")
+        },
         body: JSON.stringify(orderData),
       });
 
-      let text = await response.text(); // First get the raw response text
-      console.log("Response Text:", text); // Debugging
+      let text = await response.text();
+      console.log("Response Text:", text);
 
       let data;
       try {
-        data = JSON.parse(text); // Try parsing the text as JSON
+        data = JSON.parse(text);
       } catch (error) {
         throw new Error(
           "⚠️ Server returned invalid JSON. Response was: " + text
@@ -201,3 +240,10 @@ document
       alert("Failed to connect to the server: " + error.message);
     }
   });
+
+  function logout() {
+    console.log("Logging out...");
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.href = "homepage.html";
+}  

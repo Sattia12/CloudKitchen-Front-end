@@ -27,8 +27,11 @@ document
         options
       );
       const data = await response.json();
+      console.log("Response Status:", response.status);
+      console.log("Server Response:", data);
 
       if (response.ok) {
+        alert("Registration successful!");
         window.location.assign("login.html");
       } else {
         alert(data.error || "An error occurred during registration.");

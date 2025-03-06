@@ -10,12 +10,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const API_URL = "http://localhost:3000/inventory";
   let inventoryData = [];
   let currentSortDirection = "asc"; // Default sorting direction
+  const userEmail = localStorage.getItem("email");
+  const usernameDisplay = document.querySelector("#username");
+  const authButton = document.querySelector("#auth-btn");
+  
+  if (userEmail) {
+    usernameDisplay.textContent = userEmail;
+    authButton.textContent = "Log Out";
+
+    authButton.removeEventListener("click", logout); // Ensure no duplicate listeners
+    authButton.addEventListener("click", logout); //  Attach logout function
+  } else {
+    usernameDisplay.textContent = "Guest";
+    authButton.textContent = "Log In";
+
+    authButton.removeEventListener("click", loginRedirect); //  Ensure no duplicate listeners
+    authButton.addEventListener("click", loginRedirect); //  Attach login function
+  }
+
+function loginRedirect() {
+    window.location.href = "login.html"; // Redirect to login page
+}
 
   // Fetch and populate inventory table
   async function fetchInventory(sortBy = "name", direction = "asc") {
     try {
         const response = await fetch(`${API_URL}?sortBy=${sortBy}&direction=${direction}`);
-        const inventoryData = await response.json();
+        inventoryData = await response.json();
 
         // Clear existing table and render new data
         tbody.innerHTML = "";
@@ -151,13 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (editBtn.textContent === "Edit") {
           console.log("Editing:", item);
 
-          for (let i = 0; i < 6; i++) {
+          for (let i = 0; i < 5; i++) {
               const cellValue = cells[i].textContent.trim();
               cells[i].innerHTML = `<input type="text" value="${cellValue}" style="width: 100px; max-width: 120px;"/>`;
           }
 
           const rawExpiry = item.expiry_date || "";
-          cells[6].innerHTML = `<input type="text" value="${formatDateBritish(rawExpiry)}" style="width: 120px;" />`;
+          cells[5].innerHTML = `<input type="date" value="${formatDateBritish(rawExpiry)}" style="width: 120px;" />`;
 
           editBtn.textContent = "Save";
       } else {
@@ -169,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
               quantity: parseFloat(cells[2].querySelector("input").value),
               unit: cells[3].querySelector("input").value.trim(),
               price_per_unit: parseFloat(cells[4].querySelector("input").value),
-              expiry_date: cells[6].querySelector("input").value || null,
+              expiry_date: cells[5].querySelector("input").value || null,
               restaurant_id: 1
           };
 
@@ -198,3 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchInventory();
 });
+
+function logout() {
+    console.log("Logging out...");
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.href = "homepage.html";
+}  

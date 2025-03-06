@@ -1,5 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const userEmail = localStorage.getItem("email");
+    const usernameDisplay = document.querySelector("#username");
+    const authButton = document.querySelector("#auth-btn");
     const API_URL = "http://localhost:3000/analytics"; // Adjust if hosted
+
+
+    if (userEmail) {
+        usernameDisplay.textContent = userEmail;
+        authButton.textContent = "Log Out";
+    
+        authButton.removeEventListener("click", logout); // Ensure no duplicate listeners
+        authButton.addEventListener("click", logout); //  Attach logout function
+      } else {
+        usernameDisplay.textContent = "Guest";
+        authButton.textContent = "Log In";
+    
+        authButton.removeEventListener("click", loginRedirect); //  Ensure no duplicate listeners
+        authButton.addEventListener("click", loginRedirect); //  Attach login function
+      }
+
+    function loginRedirect() {
+        window.location.href = "login.html"; // Redirect to login page
+    }
 
     function fetchData() {
         // Fetch Total Orders
@@ -199,3 +221,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // refresh data every 5 seconds
     setInterval(fetchData, 5000);
 });
+
+function logout() {
+    console.log("Logging out...");
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.href = "homepage.html";
+}  

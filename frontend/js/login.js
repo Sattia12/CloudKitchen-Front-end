@@ -19,10 +19,14 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const response = await fetch("http://localhost:3000/users/login", options);
     const data = await response.json();
 
-    console.log(data.token);
+    console.log(data);
 
     if (response.ok) {
+      console.log(response);
+      console.log(data);
+
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
       window.location.assign("./dashboard.html");
     } else {
       alert(data.error || "Login failed.");
